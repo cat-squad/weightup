@@ -24,7 +24,7 @@ export default {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    height: 54
+    height: 44 + 4 + 4
   },
   screenContainer: {
     height: "100%"

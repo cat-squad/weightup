@@ -1,6 +1,6 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import React, { Component, Fragment } from "react";
-import { Container, Button, Item, Input, Form, Label } from "native-base";
+import { Container, Button, Item, Input, Form, Label, Text } from "native-base";
 import globalStyles from "./src/styles";
 
 import SimpleTextComponent from "./src/components/SimpleTextComponent";
@@ -38,15 +38,7 @@ export default class App extends Component {
                 />
               </Item>
             </Form>
-            <Button
-              primary
-              style={{
-                marginTop: 8,
-                marginLeft: 24,
-                marginRight: 24,
-                width: 100
-              }}
-            >
+            <Button block primary>
               <Text> Log in </Text>
             </Button>
             <Text>{this.state.activeView}</Text>
@@ -64,7 +56,7 @@ export default class App extends Component {
       default:
         return (
           <View>
-            <Text>Go home</Text>
+            <Text>How did you get here?</Text>
           </View>
         );
     }
