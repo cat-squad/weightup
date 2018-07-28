@@ -4,6 +4,7 @@ import { Container, Button, Item, Input, Form, Label, Text } from "native-base";
 import globalStyles from "./src/styles";
 
 import SimpleTextComponent from "./src/components/SimpleTextComponent";
+import LoginScreen from "./src/screens/LoginScreen";
 
 export default class App extends Component {
   constructor(props) {
@@ -15,36 +16,20 @@ export default class App extends Component {
     };
   }
 
+  setUsername = username => {
+    this.setState({ username });
+  };
+
   renderActiveView = () => {
     switch (this.state.activeView) {
       case "homeScreen":
         return (
-          <Fragment>
-            <Form style={{ width: "100%", paddingTop: 44 }}>
-              <Item floatingLabel>
-                <Label>Username</Label>
-                <Input
-                  autoCorrect={false}
-                  maxLength={32}
-                  onChangeText={username => this.setState({ username })}
-                />
-              </Item>
-              <Item floatingLabel>
-                <Label>Password</Label>
-                <Input
-                  autoCorrect={false}
-                  maxLength={32}
-                  onChangeText={password => this.setState({ password })}
-                />
-              </Item>
-            </Form>
-            <Button block primary>
-              <Text> Log in </Text>
-            </Button>
-            <Text>{this.state.activeView}</Text>
-            <Text>{this.state.username}</Text>
-            <Text>{this.state.password}</Text>
-          </Fragment>
+          <View style={{ width: "100%" }}>
+            <Text>
+              The parent component has a username of {this.state.username}
+            </Text>
+            <LoginScreen callBack_setUsername={this.setUsername} />
+          </View>
         );
       case "testScreen":
         return (

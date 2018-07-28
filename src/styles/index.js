@@ -20,7 +20,7 @@ export default {
     marginRight: $gp
   },
   navContainer: {
-    backgroundColor: "#0099CC",
+    backgroundColor: "#FFC602",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
