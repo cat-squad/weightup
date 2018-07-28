@@ -1,7 +1,6 @@
 // Global style variables
 const $gp = 8;
 
-
 // Styles
 export default {
   textInput: {
@@ -9,29 +8,28 @@ export default {
     height: 40,
     borderWidth: 1,
     margin: 4,
-    paddingLeft: 4,
+    paddingLeft: 4
   },
   container: {
     flex: 1,
-    height: '80%',
-    backgroundColor: '#0099cc',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "80%",
+    backgroundColor: "#FFF",
+    alignItems: "center",
     marginTop: $gp * 3,
     marginLeft: $gp,
-    marginRight: $gp,
+    marginRight: $gp
   },
   navContainer: {
-    backgroundColor: 'red',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: 54,
+    backgroundColor: "#0099CC",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 54
   },
   screenContainer: {
-    height: '100%',
+    height: "100%"
   },
   scrollViewContainer: {
-    alignItems: 'justifyContent',
-  },
+    alignItems: "justifyContent"
+  }
 };
