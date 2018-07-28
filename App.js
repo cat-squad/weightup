@@ -20,6 +20,10 @@ export default class App extends Component {
     this.setState({ username });
   };
 
+  setPassword = password => {
+    this.setState({ password });
+  };
+
   renderActiveView = () => {
     switch (this.state.activeView) {
       case "homeScreen":
@@ -28,7 +32,13 @@ export default class App extends Component {
             <Text>
               The parent component has a username of {this.state.username}
             </Text>
-            <LoginScreen callBack_setUsername={this.setUsername} />
+            <Text>
+              The parent component has a password of {this.state.password}
+            </Text>
+            <LoginScreen
+              callback_setUsername={this.setUsername}
+              callback_setPassword={this.setPassword}
+            />
           </View>
         );
       case "testScreen":
