@@ -22,13 +22,6 @@ export default {
     marginLeft: $gp,
     marginRight: $gp
   },
-  navContainer: {
-    backgroundColor: "#FFC602",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    height: 44 + 4 + 4
-  },
   screenContainer: {
     height: "100%"
   },

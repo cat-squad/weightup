@@ -6,6 +6,7 @@ import globalStyles from "./src/styles";
 import SimpleTextComponent from "./src/components/SimpleTextComponent";
 import LoginScreen from "./src/screens/LoginScreen";
 import MainScreen from "./src/screens/MainScreen";
+import Navigator from "./src/components/Navigator";
 
 export default class App extends Component {
   constructor(props) {
@@ -71,11 +72,7 @@ export default class App extends Component {
         >
           {this.renderActiveView()}
         </View>
-        ({this.state.activeView !== "loginScreen" && (
-          <View style={globalStyles.navContainer}>
-            <Text> Navigation goes here </Text>
-          </View>
-        )})
+        ({this.state.activeView !== "loginScreen" && <Navigator />})
       </View>
     );
   }
