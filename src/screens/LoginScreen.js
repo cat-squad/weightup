@@ -20,6 +20,8 @@ export default class LoginScreen extends Component {
     require("../static/img/wallpaper6.png")
   ];
 
+  wallpaperUri = this.images[Math.floor(Math.random() * 6)];
+
   handleLoginButtonPress = () => {
     // TODO: this screen should handle loging
     // *DO NOT* pass the password to the state!!!!
@@ -31,7 +33,7 @@ export default class LoginScreen extends Component {
   render() {
     return (
       <ImageBackground
-        source={this.images[Math.floor(Math.random() * 6)]}
+        source={this.wallpaperUri}
         style={{
           width: "100%",
           height: "100%"
@@ -50,9 +52,15 @@ export default class LoginScreen extends Component {
             paddingBottom: 80
           }}
         >
-          <Form style={{ width: "100%", paddingTop: 44 }}>
-            <Item floatingLabel>
-              <Label>Username</Label>
+          <Form style={{ width: "100%" }}>
+            <Item
+              floatingLabel
+              style={{
+                borderColor: "#1C9963",
+                marginRight: 8
+              }}
+            >
+              <Label style={{ color: "white" }}>Username</Label>
               <Input
                 autoCorrect={false}
                 maxLength={32}
@@ -61,8 +69,11 @@ export default class LoginScreen extends Component {
                 }}
               />
             </Item>
-            <Item floatingLabel>
-              <Label>Password</Label>
+            <Item
+              floatingLabel
+              style={{ borderColor: "#1C9963", marginRight: 8 }}
+            >
+              <Label style={{ color: "white" }}>Password</Label>
               <Input
                 secureTextEntry={true}
                 autoCorrect={false}

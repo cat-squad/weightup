@@ -32,6 +32,7 @@ export default class App extends Component {
   renderActiveView = () => {
     switch (this.state.activeView) {
       case "loginScreen":
+        this.count++;
         return (
           <View style={{ width: "100%" }}>
             {/* <Text> {JSON.stringify(this.state)}</Text> */}
