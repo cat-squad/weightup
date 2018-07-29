@@ -17,6 +17,12 @@ export default class App extends Component {
       password: ""
     };
   }
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+    });
+  }
 
   setUsername = username => {
     this.setState({ username });

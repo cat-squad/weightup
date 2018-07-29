@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import React, { Component } from "react";
-import { Text } from "native-base";
-
+import { Text, Footer, FooterTab, Button, Icon } from "native-base";
+import { Ionicons } from "@expo/vector-icons";
 const styles = StyleSheet.create({
   navContainer: {
     backgroundColor: "#FFC602",
@@ -15,9 +15,26 @@ const styles = StyleSheet.create({
 export default class Navigator extends Component {
   render() {
     return (
-      <View style={styles.navContainer}>
-        <Text> Navigation goes here </Text>
-      </View>
+      <Footer>
+        <FooterTab>
+          <Button vertical>
+            <Icon name="apps" />
+            <Text>Apps</Text>
+          </Button>
+          <Button vertical>
+            <Icon name="camera" />
+            <Text>Camera</Text>
+          </Button>
+          <Button vertical active>
+            <Icon active name="navigate" />
+            <Text>Navigate</Text>
+          </Button>
+          <Button vertical>
+            <Icon name="person" />
+            <Text>Contact</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
     );
   }
 }
