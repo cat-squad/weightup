@@ -63,10 +63,18 @@ export default class App extends Component {
   render() {
     return (
       <View style={globalStyles.screenContainer}>
-        <View style={globalStyles.container}>{this.renderActiveView()}</View>
-        <View style={globalStyles.navContainer}>
-          <Text> Navigation goes here </Text>
+        <View
+          style={
+            this.state.activeView !== "loginScreen" && globalStyles.container
+          }
+        >
+          {this.renderActiveView()}
         </View>
+        ({this.state.activeView !== "loginScreen" && (
+          <View style={globalStyles.navContainer}>
+            <Text> Navigation goes here </Text>
+          </View>
+        )})
       </View>
     );
   }

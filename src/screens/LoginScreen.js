@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { ImageBackground, View } from "react-native";
 import { Container, Button, Item, Input, Form, Label, Text } from "native-base";
 export default class LoginScreen extends Component {
   constructor(props) {
@@ -10,6 +11,15 @@ export default class LoginScreen extends Component {
     };
   }
 
+  images = [
+    require("../static/img/wallpaper1.png"),
+    require("../static/img/wallpaper2.png"),
+    require("../static/img/wallpaper7.png"),
+    require("../static/img/wallpaper4.png"),
+    require("../static/img/wallpaper5.png"),
+    require("../static/img/wallpaper6.png")
+  ];
+
   handleLoginButtonPress = () => {
     // TODO: this screen should handle loging
     // *DO NOT* pass the password to the state!!!!
@@ -20,44 +30,64 @@ export default class LoginScreen extends Component {
 
   render() {
     return (
-      <Fragment>
-        <Form style={{ width: "100%", paddingTop: 44 }}>
-          <Item floatingLabel>
-            <Label>Username</Label>
-            <Input
-              autoCorrect={false}
-              maxLength={32}
-              onChangeText={username => {
-                this.setState({ username });
-              }}
-            />
-          </Item>
-          <Item floatingLabel>
-            <Label>Password</Label>
-            <Input
-              secureTextEntry={true}
-              autoCorrect={false}
-              maxLength={32}
-              onChangeText={password => {
-                this.setState({ password });
-              }}
-            />
-          </Item>
-        </Form>
-        <Button
-          bordered
-          block
-          primary
+      <ImageBackground
+        source={this.images[Math.floor(Math.random() * 6)]}
+        style={{
+          width: "100%",
+          height: "100%"
+        }}
+        imageStyle={{
+          resizeMode: "cover",
+          position: "absolute",
+          left: 0,
+          top: 0
+        }}
+      >
+        <View
           style={{
-            margin: 16
-          }}
-          onPress={() => {
-            this.handleLoginButtonPress();
+            flex: 1,
+            justifyContent: "flex-end",
+            paddingBottom: 80
           }}
         >
-          <Text> Log in </Text>
-        </Button>
-      </Fragment>
+          <Form style={{ width: "100%", paddingTop: 44 }}>
+            <Item floatingLabel>
+              <Label>Username</Label>
+              <Input
+                autoCorrect={false}
+                maxLength={32}
+                onChangeText={username => {
+                  this.setState({ username });
+                }}
+              />
+            </Item>
+            <Item floatingLabel>
+              <Label>Password</Label>
+              <Input
+                secureTextEntry={true}
+                autoCorrect={false}
+                maxLength={32}
+                onChangeText={password => {
+                  this.setState({ password });
+                }}
+              />
+            </Item>
+          </Form>
+          <Button
+            block
+            primary
+            style={{
+              margin: 16,
+              backgroundColor: "#1C9963"
+            }}
+            onPress={() => {
+              this.handleLoginButtonPress();
+            }}
+          >
+            <Text> Log in </Text>
+          </Button>
+        </View>
+      </ImageBackground>
     );
   }
 }
