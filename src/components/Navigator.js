@@ -25,14 +25,14 @@ export default class Navigator extends Component {
             <Icon name="camera" />
             <Text>Camera</Text>
           </Button>
-          <Button vertical active>
+          {/* <Button vertical active>
             <Icon active name="navigate" />
             <Text>Navigate</Text>
           </Button>
           <Button vertical>
             <Icon name="person" />
             <Text>Contact</Text>
-          </Button>
+          </Button> */}
         </FooterTab>
       </Footer>
     );
