@@ -1,14 +1,22 @@
 import React, { Component, Fragment } from "react";
 import { Container, Button, Item, Input, Form, Label, Text } from "native-base";
-
-export default class App extends Component {
+export default class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      nextScreen: "mainScreen"
     };
   }
+
+  handleLoginButtonPress = () => {
+    // TODO: this screen should handle loging
+    // *DO NOT* pass the password to the state!!!!
+    this.props.callback_setUsername(this.state.username);
+    this.props.callback_setPassword(this.state.password);
+    this.props.callback_setActiveView(this.state.nextScreen);
+  };
 
   render() {
     return (
@@ -21,18 +29,17 @@ export default class App extends Component {
               maxLength={32}
               onChangeText={username => {
                 this.setState({ username });
-                this.props.callback_setUsername(username);
               }}
             />
           </Item>
           <Item floatingLabel>
             <Label>Password</Label>
             <Input
+              secureTextEntry={true}
               autoCorrect={false}
               maxLength={32}
               onChangeText={password => {
                 this.setState({ password });
-                this.props.callback_setPassword(password);
               }}
             />
           </Item>
@@ -44,10 +51,12 @@ export default class App extends Component {
           style={{
             margin: 16
           }}
+          onPress={() => {
+            this.handleLoginButtonPress();
+          }}
         >
           <Text> Log in </Text>
         </Button>
-        <Container style={{ backgroundColor: "red" }}>Hello</Container>
       </Fragment>
     );
   }

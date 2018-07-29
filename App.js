@@ -1,16 +1,17 @@
 import { View, ScrollView } from "react-native";
 import React, { Component, Fragment } from "react";
-import { Container, Button, Item, Input, Form, Label, Text } from "native-base";
+import { Text, Header } from "native-base";
 import globalStyles from "./src/styles";
 
 import SimpleTextComponent from "./src/components/SimpleTextComponent";
 import LoginScreen from "./src/screens/LoginScreen";
+import MainScreen from "./src/screens/MainScreen";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeView: "homeScreen",
+      activeView: "loginScreen",
       username: "",
       password: ""
     };
@@ -24,23 +25,25 @@ export default class App extends Component {
     this.setState({ password });
   };
 
+  setActiveView = screenName => {
+    this.setState({ activeView: screenName });
+  };
+
   renderActiveView = () => {
     switch (this.state.activeView) {
-      case "homeScreen":
+      case "loginScreen":
         return (
           <View style={{ width: "100%" }}>
-            <Text>
-              The parent component has a username of {this.state.username}
-            </Text>
-            <Text>
-              The parent component has a password of {this.state.password}
-            </Text>
+            {/* <Text> {JSON.stringify(this.state)}</Text> */}
             <LoginScreen
               callback_setUsername={this.setUsername}
               callback_setPassword={this.setPassword}
+              callback_setActiveView={this.setActiveView}
             />
           </View>
         );
+      case "mainScreen":
+        return <MainScreen />;
       case "testScreen":
         return (
           <Fragment>

@@ -1,5 +1,8 @@
 // Global style variables
 const $gp = 8;
+const $colorGreenPrimary = "#407d28";
+const $colorGreenSecondary = "#5eb376";
+const $prettyGreen = "#1C9963";
 
 // Styles
 export default {
