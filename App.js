@@ -1,20 +1,52 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import React, { Component, Fragment } from "react";
+import { Text, Header } from "native-base";
 import globalStyles from "./src/styles";
 
 import SimpleTextComponent from "./src/components/SimpleTextComponent";
+import LoginScreen from "./src/screens/LoginScreen";
+import MainScreen from "./src/screens/MainScreen";
+import Navigator from "./src/components/Navigator";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeView: "homeScreen"
+      activeView: "loginScreen",
+      username: "",
+      password: ""
     };
   }
 
+  setUsername = username => {
+    this.setState({ username });
+  };
+
+  setPassword = password => {
+    this.setState({ password });
+  };
+
+  setActiveView = screenName => {
+    this.setState({ activeView: screenName });
+  };
+
   renderActiveView = () => {
     switch (this.state.activeView) {
-      case "homeScreen":
+      case "loginScreen":
+        this.count++;
+        return (
+          <View style={{ width: "100%" }}>
+            {/* <Text> {JSON.stringify(this.state)}</Text> */}
+            <LoginScreen
+              callback_setUsername={this.setUsername}
+              callback_setPassword={this.setPassword}
+              callback_setActiveView={this.setActiveView}
+            />
+          </View>
+        );
+      case "mainScreen":
+        return <MainScreen />;
+      case "testScreen":
         return (
           <Fragment>
             <Text style={[globalStyles.textInput]}>Hello</Text>
@@ -24,7 +56,7 @@ export default class App extends Component {
       default:
         return (
           <View>
-            <Text>Go home</Text>
+            <Text>How did you get here?</Text>
           </View>
         );
     }
@@ -33,8 +65,14 @@ export default class App extends Component {
   render() {
     return (
       <View style={globalStyles.screenContainer}>
-        <View style={globalStyles.container}>{this.renderActiveView()}</View>
-        <View style={globalStyles.navContainer} />
+        <View
+          style={
+            this.state.activeView !== "loginScreen" && globalStyles.container
+          }
+        >
+          {this.renderActiveView()}
+        </View>
+        ({this.state.activeView !== "loginScreen" && <Navigator />})
       </View>
     );
   }
