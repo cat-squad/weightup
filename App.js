@@ -3,10 +3,16 @@ import React, { Component, Fragment } from "react";
 import { Text, Header } from "native-base";
 import globalStyles from "./src/styles";
 
-import SimpleTextComponent from "./src/components/SimpleTextComponent";
 import LoginScreen from "./src/screens/LoginScreen";
 import MainScreen from "./src/screens/MainScreen";
+import ErrorScreen from "./src/screens/ErrorScreen";
+import ExercisesScreen from "./src/screens/ExercisesScreen";
+import SelectExerciseScreen from "./src/screens/SelectExerciseScreen";
+
+import SimpleTextComponent from "./src/components/SimpleTextComponent";
 import Navigator from "./src/components/Navigator";
+
+import { Font } from "expo";
 
 export default class App extends Component {
   constructor(props) {
@@ -17,8 +23,8 @@ export default class App extends Component {
       password: ""
     };
   }
-  async componentWillMount() {
-    await Expo.Font.loadAsync({
+  async UNSAFE_componentWillMount() {
+    await Font.loadAsync({
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
     });
@@ -39,7 +45,6 @@ export default class App extends Component {
   renderActiveView = () => {
     switch (this.state.activeView) {
       case "loginScreen":
-        this.count++;
         return (
           <View style={{ width: "100%" }}>
             {/* <Text> {JSON.stringify(this.state)}</Text> */}
@@ -50,6 +55,14 @@ export default class App extends Component {
             />
           </View>
         );
+      case "exercisesScreen":
+        return (
+          <View style={{ width: "100%" }}>
+            <ExercisesScreen />
+          </View>
+        );
+      case "selectExerciseScreen":
+        return <SelectExerciseScreen />;
       case "mainScreen":
         return <MainScreen />;
       case "testScreen":
@@ -60,11 +73,7 @@ export default class App extends Component {
           </Fragment>
         );
       default:
-        return (
-          <View>
-            <Text>How did you get here?</Text>
-          </View>
-        );
+        return <ErrorScreen />;
     }
   };
 
