@@ -17,7 +17,7 @@ export default class Navigator extends Component {
     return (
       <Footer style={{ borderWidth: 0 }}>
         <FooterTab>
-          <Button vertical>
+          <Button vertical style={{ backgroundColor: "#daeee6" }}>
             <Icon name="add-circle" style={{ color: "#1C9963" }} />
             <Text style={{ color: "#1C9963" }}>Workouts</Text>
           </Button>

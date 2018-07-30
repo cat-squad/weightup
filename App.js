@@ -20,7 +20,8 @@ export default class App extends Component {
     this.state = {
       activeView: "loginScreen",
       username: "",
-      password: ""
+      password: "",
+      selectedMuscleGroup: ""
     };
   }
   async UNSAFE_componentWillMount() {
@@ -42,6 +43,10 @@ export default class App extends Component {
     this.setState({ activeView: screenName });
   };
 
+  setSelectedMuscleGroup = selectedMuscleGroup => {
+    this.setState({ selectedMuscleGroup });
+  };
+
   renderActiveView = () => {
     switch (this.state.activeView) {
       case "loginScreen":
@@ -58,11 +63,18 @@ export default class App extends Component {
       case "exercisesScreen":
         return (
           <View style={{ width: "100%" }}>
-            <ExercisesScreen />
+            <ExercisesScreen
+              selectedMuscleGroup={this.state.selectedMuscleGroup}
+            />
           </View>
         );
       case "selectExerciseScreen":
-        return <SelectExerciseScreen />;
+        return (
+          <SelectExerciseScreen
+            callback_setActiveView={this.setActiveView}
+            callback_setSelectedMuscleGroup={this.setSelectedMuscleGroup}
+          />
+        );
       case "mainScreen":
         return <MainScreen />;
       case "testScreen":
@@ -82,7 +94,9 @@ export default class App extends Component {
       <View style={globalStyles.screenContainer}>
         <View
           style={
-            this.state.activeView !== "loginScreen" && globalStyles.container
+            this.state.activeView !== "loginScreen" &&
+            this.state.activeView !== "exercisesScreen" &&
+            globalStyles.container
           }
         >
           {this.renderActiveView()}

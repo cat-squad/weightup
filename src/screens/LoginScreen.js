@@ -97,6 +97,22 @@ export default class LoginScreen extends Component {
           >
             <Text> Log in </Text>
           </Button>
+          <View
+            style={{
+              marginLeft: 16,
+              marginRight: 16,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}
+          >
+            <Button small transparent>
+              <Text>Create Account </Text>
+            </Button>
+            <Button small transparent>
+              <Text>Forgot Password </Text>
+            </Button>
+          </View>
         </View>
       </ImageBackground>
     );
