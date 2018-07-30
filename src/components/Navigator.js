@@ -13,19 +13,40 @@ const styles = StyleSheet.create({
 });
 
 export default class Navigator extends Component {
+  navigateToSelectedScreen = nextScreen => {
+    this.props.callback_setActiveView(nextScreen);
+  };
+
+  // TODO: Add style={{ backgroundColor: "#daeee6" }}
+  // to the selected/active tab. It's a nice color :D
   render() {
     return (
       <Footer style={{ borderWidth: 0 }}>
         <FooterTab>
-          <Button vertical style={{ backgroundColor: "#daeee6" }}>
+          <Button
+            vertical
+            onPress={() => {
+              this.navigateToSelectedScreen("selectExerciseScreen");
+            }}
+          >
             <Icon name="add-circle" style={{ color: "#1C9963" }} />
             <Text style={{ color: "#1C9963" }}>Workouts</Text>
           </Button>
-          <Button vertical>
+          <Button
+            vertical
+            onPress={() => {
+              this.navigateToSelectedScreen("dataScreen");
+            }}
+          >
             <Icon name="analytics" style={{ color: "#1C9963" }} />
             <Text style={{ color: "#1C9963" }}>Data</Text>
           </Button>
-          <Button vertical>
+          <Button
+            vertical
+            onPress={() => {
+              this.navigateToSelectedScreen("settingsScreen");
+            }}
+          >
             <Icon name="settings" style={{ color: "#1C9963" }} />
             <Text style={{ color: "#1C9963" }}>Settings</Text>
           </Button>

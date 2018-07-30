@@ -3,11 +3,13 @@ import React, { Component, Fragment } from "react";
 import { Text, Header } from "native-base";
 import globalStyles from "./src/styles";
 
-import LoginScreen from "./src/screens/LoginScreen";
-import MainScreen from "./src/screens/MainScreen";
+import DataScreen from "./src/screens/DataScreen";
 import ErrorScreen from "./src/screens/ErrorScreen";
 import ExercisesScreen from "./src/screens/ExercisesScreen";
+import LoginScreen from "./src/screens/LoginScreen";
+import MainScreen from "./src/screens/MainScreen";
 import SelectExerciseScreen from "./src/screens/SelectExerciseScreen";
+import SettingsScreen from "./src/screens/SettingsScreen";
 
 import SimpleTextComponent from "./src/components/SimpleTextComponent";
 import Navigator from "./src/components/Navigator";
@@ -76,6 +78,10 @@ export default class App extends Component {
             callback_setSelectedMuscleGroup={this.setSelectedMuscleGroup}
           />
         );
+      case "dataScreen":
+        return <DataScreen callback_setActiveView={this.setActiveView} />;
+      case "settingsScreen":
+        return <SettingsScreen callback_setActiveView={this.setActiveView} />;
       case "mainScreen":
         return <MainScreen />;
       case "testScreen":
@@ -93,16 +99,10 @@ export default class App extends Component {
   render() {
     return (
       <View style={globalStyles.screenContainer}>
-        <View
-          style={
-            this.state.activeView !== "loginScreen" &&
-            this.state.activeView !== "exercisesScreen" &&
-            globalStyles.container
-          }
-        >
-          {this.renderActiveView()}
-        </View>
-        ({this.state.activeView !== "loginScreen" && <Navigator />})
+        <View style={[globalStyles.container]}>{this.renderActiveView()}</View>
+        ({this.state.activeView !== "loginScreen" && (
+          <Navigator callback_setActiveView={this.setActiveView} />
+        )})
       </View>
     );
   }

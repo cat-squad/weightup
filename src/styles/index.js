@@ -15,9 +15,9 @@ export default {
   },
   container: {
     flex: 1,
-    height: "80%",
-    backgroundColor: "#FFF",
-    alignItems: "center",
+    alignItems: "center"
+  },
+  containerMargins: {
     marginTop: $gp * 3,
     marginLeft: $gp,
     marginRight: $gp

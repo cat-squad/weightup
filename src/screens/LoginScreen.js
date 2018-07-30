@@ -49,7 +49,7 @@ export default class LoginScreen extends Component {
           style={{
             flex: 1,
             justifyContent: "flex-end",
-            paddingBottom: 80
+            paddingBottom: 60
           }}
         >
           <Form style={{ width: "100%" }}>
