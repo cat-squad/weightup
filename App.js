@@ -65,6 +65,7 @@ export default class App extends Component {
           <View style={{ width: "100%" }}>
             <ExercisesScreen
               selectedMuscleGroup={this.state.selectedMuscleGroup}
+              callback_setActiveView={this.setActiveView}
             />
           </View>
         );
