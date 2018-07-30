@@ -7,7 +7,7 @@ export default class LoginScreen extends Component {
     this.state = {
       username: "",
       password: "",
-      nextScreen: "mainScreen"
+      nextScreen: "selectExerciseScreen"
     };
   }
 
@@ -49,7 +49,7 @@ export default class LoginScreen extends Component {
           style={{
             flex: 1,
             justifyContent: "flex-end",
-            paddingBottom: 80
+            paddingBottom: 60
           }}
         >
           <Form style={{ width: "100%" }}>
@@ -97,6 +97,22 @@ export default class LoginScreen extends Component {
           >
             <Text> Log in </Text>
           </Button>
+          <View
+            style={{
+              marginLeft: 16,
+              marginRight: 16,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}
+          >
+            <Button small transparent>
+              <Text>Create Account </Text>
+            </Button>
+            <Button small transparent>
+              <Text>Forgot Password </Text>
+            </Button>
+          </View>
         </View>
       </ImageBackground>
     );

@@ -3,10 +3,18 @@ import React, { Component, Fragment } from "react";
 import { Text, Header } from "native-base";
 import globalStyles from "./src/styles";
 
-import SimpleTextComponent from "./src/components/SimpleTextComponent";
+import DataScreen from "./src/screens/DataScreen";
+import ErrorScreen from "./src/screens/ErrorScreen";
+import ExercisesScreen from "./src/screens/ExercisesScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import MainScreen from "./src/screens/MainScreen";
+import SelectExerciseScreen from "./src/screens/SelectExerciseScreen";
+import SettingsScreen from "./src/screens/SettingsScreen";
+
+import SimpleTextComponent from "./src/components/SimpleTextComponent";
 import Navigator from "./src/components/Navigator";
+
+import { Font } from "expo";
 
 export default class App extends Component {
   constructor(props) {
@@ -14,8 +22,15 @@ export default class App extends Component {
     this.state = {
       activeView: "loginScreen",
       username: "",
-      password: ""
+      password: "",
+      selectedMuscleGroup: ""
     };
+  }
+  async UNSAFE_componentWillMount() {
+    await Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+    });
   }
 
   setUsername = username => {
@@ -30,10 +45,13 @@ export default class App extends Component {
     this.setState({ activeView: screenName });
   };
 
+  setSelectedMuscleGroup = selectedMuscleGroup => {
+    this.setState({ selectedMuscleGroup });
+  };
+
   renderActiveView = () => {
     switch (this.state.activeView) {
       case "loginScreen":
-        this.count++;
         return (
           <View style={{ width: "100%" }}>
             {/* <Text> {JSON.stringify(this.state)}</Text> */}
@@ -44,6 +62,26 @@ export default class App extends Component {
             />
           </View>
         );
+      case "exercisesScreen":
+        return (
+          <View style={{ width: "100%" }}>
+            <ExercisesScreen
+              selectedMuscleGroup={this.state.selectedMuscleGroup}
+              callback_setActiveView={this.setActiveView}
+            />
+          </View>
+        );
+      case "selectExerciseScreen":
+        return (
+          <SelectExerciseScreen
+            callback_setActiveView={this.setActiveView}
+            callback_setSelectedMuscleGroup={this.setSelectedMuscleGroup}
+          />
+        );
+      case "dataScreen":
+        return <DataScreen callback_setActiveView={this.setActiveView} />;
+      case "settingsScreen":
+        return <SettingsScreen callback_setActiveView={this.setActiveView} />;
       case "mainScreen":
         return <MainScreen />;
       case "testScreen":
@@ -54,25 +92,17 @@ export default class App extends Component {
           </Fragment>
         );
       default:
-        return (
-          <View>
-            <Text>How did you get here?</Text>
-          </View>
-        );
+        return <ErrorScreen />;
     }
   };
 
   render() {
     return (
       <View style={globalStyles.screenContainer}>
-        <View
-          style={
-            this.state.activeView !== "loginScreen" && globalStyles.container
-          }
-        >
-          {this.renderActiveView()}
-        </View>
-        ({this.state.activeView !== "loginScreen" && <Navigator />})
+        <View style={[globalStyles.container]}>{this.renderActiveView()}</View>
+        ({this.state.activeView !== "loginScreen" && (
+          <Navigator callback_setActiveView={this.setActiveView} />
+        )})
       </View>
     );
   }
