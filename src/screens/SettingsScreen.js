@@ -31,10 +31,28 @@ export default class DataScreen extends Component {
         <View
           style={{
             alignItems: "center",
-            paddingTop: 8
+            paddingTop: 8,
+            paddingRight: 16,
+            paddingLeft: 16
           }}
         >
-          <Text>Settings coming soon</Text>
+          <Button
+            onPress={() => {
+              this.props.callback_signOut();
+            }}
+            iconLeft
+            block
+            bordered
+            primary
+            style={{
+              height: 60,
+              marginTop: 8,
+              marginBottom: 8,
+              borderColor: "#1C9963"
+            }}
+          >
+            <Text style={{ fontSize: 14, color: "#1C9963" }}>Sign out</Text>
+          </Button>
         </View>
       </View>
     );
