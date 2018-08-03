@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
   }
 });
 
+const activeTabStyle = StyleSheet.flatten(styles.activeTab);
+
 export default class Navigator extends Component {
   navigateToSelectedScreen = nextScreen => {
     this.props.callback_setActiveView(nextScreen);
@@ -32,6 +34,7 @@ export default class Navigator extends Component {
             <Icon name="add-circle" style={{ color: "#1C9963" }} />
             <Text style={{ color: "#1C9963" }}>Workouts</Text>
           </Button>
+
           <Button
             vertical
             onPress={() => {
@@ -41,6 +44,7 @@ export default class Navigator extends Component {
             <Icon name="analytics" style={{ color: "#1C9963" }} />
             <Text style={{ color: "#1C9963" }}>Data</Text>
           </Button>
+
           <Button
             vertical
             onPress={() => {

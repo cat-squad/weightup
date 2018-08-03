@@ -49,6 +49,10 @@ export default class App extends Component {
     this.setState({ selectedMuscleGroup });
   };
 
+  handleSignout = () => {
+    this.setState({ username: "", password: "", activeView: "loginScreen" });
+  };
+
   renderActiveView = () => {
     switch (this.state.activeView) {
       case "loginScreen":
@@ -79,9 +83,9 @@ export default class App extends Component {
           />
         );
       case "dataScreen":
-        return <DataScreen callback_setActiveView={this.setActiveView} />;
+        return <DataScreen />;
       case "settingsScreen":
-        return <SettingsScreen callback_setActiveView={this.setActiveView} />;
+        return <SettingsScreen callback_signOut={this.handleSignout} />;
       case "mainScreen":
         return <MainScreen />;
       case "testScreen":
@@ -101,7 +105,10 @@ export default class App extends Component {
       <View style={globalStyles.screenContainer}>
         <View style={[globalStyles.container]}>{this.renderActiveView()}</View>
         ({this.state.activeView !== "loginScreen" && (
-          <Navigator callback_setActiveView={this.setActiveView} />
+          <Navigator
+            callback_setActiveView={this.setActiveView}
+            activeView={this.state.activeView}
+          />
         )})
       </View>
     );
