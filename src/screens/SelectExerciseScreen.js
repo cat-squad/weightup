@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { ScrollView, View, Fragment } from "react-native";
+import MuscleGroupList from "../components/MuscleGroupList";
+
 import {
   Text,
   Button,
@@ -68,10 +70,14 @@ export default class SelectExerciseScreen extends Component {
     this.props.callback_setSelectedMuscleGroup(selectedMuscleGroup);
   };
 
+  handleCheckboxPress = muscleGroup => {
+    alert(muscleGroup);
+  };
+
   renderSelectList = list => {
     return list.map(item => {
       return (
-        <ListItem style={{ width: "100%" }}>
+        <ListItem style={{ width: "100%" }} key={item.name}>
           <CheckBox checked={item.selected} />
           <Body>
             <Text>{item.name}</Text>
@@ -98,7 +104,7 @@ export default class SelectExerciseScreen extends Component {
             width: "100%"
           }}
         >
-          {this.renderSelectList(this.state.muscleGroups)}
+          <MuscleGroupList />
         </ScrollView>
       </View>
     );
