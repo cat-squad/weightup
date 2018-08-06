@@ -20,47 +20,18 @@ export default class MuscleGroupList extends Component {
     super(props);
     this.state = {
       muscleGroups: [
-        {
-          name: "Biceps",
-          selected: false
-        },
-        {
-          name: "Triceps",
-          selected: false
-        },
-        {
-          name: "Shoulders",
-          selected: false
-        },
-        {
-          name: "Back",
-          selected: false
-        },
-        {
-          name: "Abs",
-          selected: false
-        },
-        {
-          name: "Hamstrings",
-          selected: false
-        },
-        {
-          name: "Quads",
-          selected: true
-        },
-        {
-          name: "Calves",
-          selected: true
-        },
-        {
-          name: "Glutes",
-          selected: false
-        },
-        {
-          name: "Chest",
-          selected: false
-        }
-      ]
+        "Abs",
+        "Shoulders",
+        "Triceps",
+        "Biceps",
+        "Chest",
+        "Back",
+        "Glutes",
+        "Quads",
+        "Hamstrings",
+        "Calves"
+      ],
+      selected: []
     };
   }
 
@@ -69,35 +40,37 @@ export default class MuscleGroupList extends Component {
     this.props.callback_setSelectedMuscleGroup(selectedMuscleGroup);
   };
 
-  toggleSelected = muscleGroup => {
-    const muscleGroups = this.state.muscleGroups;
-    const index = (muscleGroups.find(
-      element => element.name === muscleGroup.name
-    ).selected = true);
-    this.setState({ muscleGroups });
+  toggleSelected = selected => {
+    const indexOf = this.state.selected.indexOf(selected);
+    if (indexOf >= 0) {
+      let newSelectedArray = this.state.selected;
+      newSelectedArray.splice(indexOf, 1);
+      this.setState(prevState => ({
+        selected: [...newSelectedArray]
+      }));
+    } else {
+      this.setState(prevState => ({
+        selected: [...prevState.selected, selected]
+      }));
+    }
   };
 
   renderSelectList = list => {
     return list.map(item => {
       return (
         <View
-          key={item.name}
+          key={item}
           style={{ paddingTop: 4, paddingBottom: 4, width: "100%" }}
         >
           <Button
             full
-            bordered
+            bordered={true}
             rounded
             onPress={() => {
               this.toggleSelected(item);
             }}
-            style={
-              item.selected
-                ? { backgroundColor: "#1C9963", borderColor: "#1C9963" }
-                : { borderColor: "#A9A9A9" }
-            }
           >
-            <Text style={!item.selected && { color: "#000" }}>{item.name}</Text>
+            <Text style={{ color: "#000" }}>{item}</Text>
           </Button>
         </View>
       );
@@ -116,6 +89,7 @@ export default class MuscleGroupList extends Component {
             width: "100%"
           }}
         >
+          <Text>{JSON.stringify(this.state.selected)}</Text>
           {this.renderSelectList(this.state.muscleGroups)}
         </ScrollView>
       </View>
