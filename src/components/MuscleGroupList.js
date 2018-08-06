@@ -42,6 +42,7 @@ export default class MuscleGroupList extends Component {
 
   toggleSelected = selected => {
     const indexOf = this.state.selected.indexOf(selected);
+
     if (indexOf >= 0) {
       let newSelectedArray = this.state.selected;
       newSelectedArray.splice(indexOf, 1);
@@ -58,14 +59,13 @@ export default class MuscleGroupList extends Component {
   renderSelectList = list => {
     return list.map(item => {
       return (
-        <View
-          key={item}
-          style={{ paddingTop: 4, paddingBottom: 4, width: "100%" }}
-        >
+        <View key={item} style={{ padding: 4, width: "100%" }}>
           <Button
             full
-            bordered={true}
+            warning
+            bordered={!this.state.selected.includes(item)}
             rounded
+            style={{ height: 40 }}
             onPress={() => {
               this.toggleSelected(item);
             }}
@@ -75,6 +75,12 @@ export default class MuscleGroupList extends Component {
         </View>
       );
     });
+  };
+
+  handleBuildWorkoutPress = () => {
+    alert(
+      "Let's build a work for" + this.state.selected.map(item => " " + item)
+    );
   };
 
   render() {
@@ -89,8 +95,26 @@ export default class MuscleGroupList extends Component {
             width: "100%"
           }}
         >
-          <Text>{JSON.stringify(this.state.selected)}</Text>
+          <Text style={{ paddingTop: 8, paddingBottom: 8 }}>
+            Select which muscle groups you want to add to your workout!
+          </Text>
           {this.renderSelectList(this.state.muscleGroups)}
+
+          <Button
+            block
+            primary
+            style={{
+              marginTop: 16,
+              marginBottom: 20,
+              backgroundColor: "#1C9963"
+            }}
+            onPress={() => {
+              this.handleBuildWorkoutPress();
+            }}
+          >
+            <Text> Build my workout! </Text>
+            <Icon name="arrow-forward" style={{ color: "#fff" }} />
+          </Button>
         </ScrollView>
       </View>
     );
