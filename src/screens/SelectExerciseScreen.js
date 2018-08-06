@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { ScrollView, View, Fragment } from "react-native";
-import MuscleGroupList from "../components/MuscleGroupList";
 
 import {
   Text,
