@@ -21,47 +21,18 @@ export default class SelectExerciseScreen extends Component {
     super(props);
     this.state = {
       muscleGroups: [
-        {
-          name: "Biceps",
-          selected: false
-        },
-        {
-          name: "Triceps",
-          selected: false
-        },
-        {
-          name: "Shoulders",
-          selected: false
-        },
-        {
-          name: "Back",
-          selected: false
-        },
-        {
-          name: "Abs",
-          selected: false
-        },
-        {
-          name: "Hamstrings",
-          selected: false
-        },
-        {
-          name: "Quads",
-          selected: false
-        },
-        {
-          name: "Calves",
-          selected: false
-        },
-        {
-          name: "Glutes",
-          selected: false
-        },
-        {
-          name: "Chest",
-          selected: false
-        }
-      ]
+        "Abs",
+        "Shoulders",
+        "Triceps",
+        "Biceps",
+        "Chest",
+        "Back",
+        "Glutes",
+        "Quads",
+        "Hamstrings",
+        "Calves"
+      ],
+      selected: []
     };
   }
 
@@ -70,31 +41,48 @@ export default class SelectExerciseScreen extends Component {
     this.props.callback_setSelectedMuscleGroup(selectedMuscleGroup);
   };
 
-  handleCheckboxPress = muscleGroup => {
-    alert(muscleGroup);
-  };
+  toggleSelected = selected => {
+    const indexOf = this.state.selected.indexOf(selected);
 
-  renderSelectListOld = list => {
-    return list.map(item => {
-      return (
-        <ListItem style={{ width: "100%" }} key={item.name}>
-          <CheckBox checked={item.selected} />
-          <Body>
-            <Text>{item.name}</Text>
-          </Body>
-        </ListItem>
-      );
-    });
+    if (indexOf >= 0) {
+      let newSelectedArray = this.state.selected;
+      newSelectedArray.splice(indexOf, 1);
+      this.setState(prevState => ({
+        selected: [...newSelectedArray]
+      }));
+    } else {
+      this.setState(prevState => ({
+        selected: [...prevState.selected, selected]
+      }));
+    }
   };
 
   renderSelectList = list => {
     return list.map(item => {
       return (
-        <Button key={item.name} onPress={this.handleCheckboxPress}>
-          <Text>{item.name}</Text>
-        </Button>
+        <View key={item} style={{ padding: 4, width: "100%" }}>
+          <Button
+            full
+            warning
+            bordered={!this.state.selected.includes(item)}
+            rounded
+            style={{ height: 40 }}
+            onPress={() => {
+              this.toggleSelected(item);
+            }}
+          >
+            <Text style={{ color: "#000" }}>{item}</Text>
+          </Button>
+        </View>
       );
     });
+  };
+
+  handleBuildWorkoutPress = () => {
+    alert(
+      "Let's build a work for" + this.state.selected.map(item => " " + item)
+    );
+    this.props.callback_setActiveView("exercisesScreen");
   };
 
   render() {
@@ -105,17 +93,37 @@ export default class SelectExerciseScreen extends Component {
             <Title>Select Muscle Groups</Title>
           </Body>
         </Header>
-        <ScrollView
-          contentContainerStyle={{
-            alignItems: "center",
-            paddingTop: 8,
-            paddingRight: 16,
-            paddingLeft: 16,
-            width: "100%"
-          }}
-        >
-          <MuscleGroupList />
-        </ScrollView>
+        <View style={{ width: "100%" }}>
+          <ScrollView
+            contentContainerStyle={{
+              alignItems: "center",
+              paddingTop: 8,
+              paddingRight: 16,
+              paddingLeft: 16,
+              width: "100%"
+            }}
+          >
+            <Text style={{ paddingTop: 8, paddingBottom: 8 }}>
+              Select which muscle groups you want to add to your workout!
+            </Text>
+            {this.renderSelectList(this.state.muscleGroups)}
+            <Button
+              block
+              primary
+              style={{
+                marginTop: 16,
+                marginBottom: 20,
+                backgroundColor: "#1C9963"
+              }}
+              onPress={() => {
+                this.handleBuildWorkoutPress();
+              }}
+            >
+              <Text> Build my workout! </Text>
+              <Icon name="arrow-forward" style={{ color: "#fff" }} />
+            </Button>
+          </ScrollView>
+        </View>
       </View>
     );
   }
