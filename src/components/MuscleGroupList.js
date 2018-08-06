@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { ScrollView, View, Fragment } from "react-native";
-import MuscleGroupList from "../components/MuscleGroupList";
-
 import {
   Text,
   Button,
@@ -13,10 +11,11 @@ import {
   Body,
   ListItem,
   CheckBox,
-  Content
+  Content,
+  Radio
 } from "native-base";
 
-export default class SelectExerciseScreen extends Component {
+export default class MuscleGroupList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,11 +46,11 @@ export default class SelectExerciseScreen extends Component {
         },
         {
           name: "Quads",
-          selected: false
+          selected: true
         },
         {
           name: "Calves",
-          selected: false
+          selected: true
         },
         {
           name: "Glutes",
@@ -70,41 +69,44 @@ export default class SelectExerciseScreen extends Component {
     this.props.callback_setSelectedMuscleGroup(selectedMuscleGroup);
   };
 
-  handleCheckboxPress = muscleGroup => {
-    alert(muscleGroup);
-  };
-
-  renderSelectListOld = list => {
-    return list.map(item => {
-      return (
-        <ListItem style={{ width: "100%" }} key={item.name}>
-          <CheckBox checked={item.selected} />
-          <Body>
-            <Text>{item.name}</Text>
-          </Body>
-        </ListItem>
-      );
-    });
+  toggleSelected = muscleGroup => {
+    const muscleGroups = this.state.muscleGroups;
+    const index = (muscleGroups.find(
+      element => element.name === muscleGroup.name
+    ).selected = true);
+    this.setState({ muscleGroups });
   };
 
   renderSelectList = list => {
     return list.map(item => {
       return (
-        <Button key={item.name} onPress={this.handleCheckboxPress}>
-          <Text>{item.name}</Text>
-        </Button>
+        <View
+          key={item.name}
+          style={{ paddingTop: 4, paddingBottom: 4, width: "100%" }}
+        >
+          <Button
+            full
+            bordered
+            rounded
+            onPress={() => {
+              this.toggleSelected(item);
+            }}
+            style={
+              item.selected
+                ? { backgroundColor: "#1C9963", borderColor: "#1C9963" }
+                : { borderColor: "#A9A9A9" }
+            }
+          >
+            <Text style={!item.selected && { color: "#000" }}>{item.name}</Text>
+          </Button>
+        </View>
       );
     });
   };
 
   render() {
     return (
-      <View style={{ height: "100%", width: "100%" }}>
-        <Header>
-          <Body>
-            <Title>Select Muscle Groups</Title>
-          </Body>
-        </Header>
+      <View style={{ width: "100%" }}>
         <ScrollView
           contentContainerStyle={{
             alignItems: "center",
@@ -114,7 +116,7 @@ export default class SelectExerciseScreen extends Component {
             width: "100%"
           }}
         >
-          <MuscleGroupList />
+          {this.renderSelectList(this.state.muscleGroups)}
         </ScrollView>
       </View>
     );

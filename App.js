@@ -26,6 +26,7 @@ export default class App extends Component {
       selectedMuscleGroup: ""
     };
   }
+
   async UNSAFE_componentWillMount() {
     await Font.loadAsync({
       Roboto: require("native-base/Fonts/Roboto.ttf"),
