@@ -42,7 +42,6 @@ export default class SelectExerciseScreen extends Component {
   };
 
   setSelected = selectedList => {
-    alert(selectedList);
     this.setState(() => ({
       selected: [...selectedList]
     }));

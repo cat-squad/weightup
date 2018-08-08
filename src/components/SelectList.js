@@ -16,21 +16,27 @@ export default class SelectExerciseScreen extends Component {
     if (indexOf >= 0) {
       let newSelectedArray = this.state.selected;
       newSelectedArray.splice(indexOf, 1);
-      this.setState(prevState => ({
-        selected: [...newSelectedArray]
-      }));
+      this.setState(
+        prevState => ({
+          selected: [...newSelectedArray]
+        }),
+        () => {
+          this.updateSelectedList();
+        }
+      );
     } else {
-      this.setState(prevState => ({
-        selected: [...prevState.selected, selected]
-      }));
+      this.setState(
+        prevState => ({
+          selected: [...prevState.selected, selected]
+        }),
+        () => {
+          this.updateSelectedList();
+        }
+      );
     }
-
-    // TODO : PUT THIS IN A NEXT TICK OR CALLBACK FOR SETSTATE
-    this.updateSelectedList();
   };
 
   updateSelectedList = () => {
-    alert(JSON.stringify(this.state));
     this.props.callback_setSelected(this.state.selected);
   };
 
