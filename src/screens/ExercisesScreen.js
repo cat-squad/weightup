@@ -74,9 +74,9 @@ export default class ExercisesScreen extends Component {
           </Body>
           <Right />
         </Header>
-        <View>
+        <View style={{ height: 440 }}>
           <DeckSwiper
-            style={{ backgroundColor: "green" }}
+            ref={c => (this._deckSwiper = c)}
             dataSource={cards}
             renderItem={item => (
               <Card style={{ elevation: 3 }}>
@@ -99,6 +99,49 @@ export default class ExercisesScreen extends Component {
               </Card>
             )}
           />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            flex: 1,
+            justifyContent: "space-around",
+            padding: 15
+          }}
+        >
+          <Button
+            block
+            primary
+            style={{
+              marginTop: 16,
+              marginBottom: 20,
+              marginRight: 8,
+              backgroundColor: "#1C9963",
+              flexGrow: 1,
+              height: 44
+            }}
+            iconLeft
+            onPress={() => this._deckSwiper._root.swipeLeft()}
+          >
+            <Icon name="arrow-back" />
+            <Text>NO</Text>
+          </Button>
+          <Button
+            block
+            primary
+            style={{
+              marginTop: 16,
+              marginBottom: 20,
+              marginLeft: 8,
+              backgroundColor: "#1C9963",
+              flexGrow: 1,
+              height: 44
+            }}
+            iconRight
+            onPress={() => this._deckSwiper._root.swipeRight()}
+          >
+            <Text>YES</Text>
+            <Icon name="arrow-forward" />
+          </Button>
         </View>
       </View>
     );
