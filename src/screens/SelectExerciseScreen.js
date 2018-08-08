@@ -74,7 +74,6 @@ export default class SelectExerciseScreen extends Component {
           >
             <Text style={{ paddingTop: 8, paddingBottom: 8 }}>
               Select which muscle groups you want to add to your workout!
-              {JSON.stringify(this.state)}
             </Text>
             <SelectList
               list={this.state.muscleGroups}

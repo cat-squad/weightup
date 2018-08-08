@@ -42,9 +42,7 @@ export default class SelectExerciseScreen extends Component {
 
   render() {
     return (
-      <View style={{ height: "100%", width: "100%" }}>
-        <Text> {JSON.stringify(this.state)}</Text>
-
+      <View style={{ width: "100%" }}>
         {this.props.list.map(item => {
           return (
             <View key={item} style={{ padding: 4, width: "100%" }}>

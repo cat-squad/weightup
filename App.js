@@ -104,13 +104,14 @@ export default class App extends Component {
   render() {
     return (
       <View style={globalStyles.screenContainer}>
-        <View style={[globalStyles.container]}>{this.renderActiveView()}</View>
-        ({this.state.activeView !== "loginScreen" && (
+        <View style={[globalStyles.container]}>{this.renderActiveView()}</View>(
+        {this.state.activeView !== "loginScreen" && (
           <Navigator
             callback_setActiveView={this.setActiveView}
             activeView={this.state.activeView}
           />
-        )})
+        )}
+        )
       </View>
     );
   }
