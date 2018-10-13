@@ -2,7 +2,9 @@ import { View, ScrollView } from "react-native";
 import React, { Component, Fragment } from "react";
 import { Text, Header } from "native-base";
 import globalStyles from "./src/styles";
+import { Ionicons } from "@expo/vector-icons";
 
+import TestScreen from "./src/screens/TestScreen";
 import DataScreen from "./src/screens/DataScreen";
 import ErrorScreen from "./src/screens/ErrorScreen";
 import ExercisesScreen from "./src/screens/ExercisesScreen";
@@ -20,60 +22,85 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeView: "loginScreen",
+      activeView: "testScreen",
       username: "",
       password: "",
-      selectedMuscleGroup: ""
+      selectedMuscleGroup: "",
+      fontsLoaded: false
     };
   }
 
-  async UNSAFE_componentWillMount() {
+  async componentWillMount() {
     await Font.loadAsync({
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
     });
+    this.setState({
+      fontsLoaded: true
+    });
   }
 
   setUsername = username => {
-    this.setState({ username });
+    this.setState({
+      username
+    });
   };
 
   setPassword = password => {
-    this.setState({ password });
+    this.setState({
+      password
+    });
   };
 
   setActiveView = screenName => {
-    this.setState({ activeView: screenName });
+    this.setState({
+      activeView: screenName
+    });
   };
 
   setSelectedMuscleGroup = selectedMuscleGroup => {
-    this.setState({ selectedMuscleGroup });
+    this.setState({
+      selectedMuscleGroup
+    });
   };
 
   handleSignout = () => {
-    this.setState({ username: "", password: "", activeView: "loginScreen" });
+    this.setState({
+      username: "",
+      password: "",
+      activeView: "loginScreen"
+    });
   };
 
   renderActiveView = () => {
     switch (this.state.activeView) {
       case "loginScreen":
         return (
-          <View style={{ width: "100%" }}>
-            {/* <Text> {JSON.stringify(this.state)}</Text> */}
+          <View
+            style={{
+              width: "100%"
+            }}
+          >
+            {" "}
+            {/* <Text> {JSON.stringify(this.state)}</Text> */}{" "}
             <LoginScreen
               callback_setUsername={this.setUsername}
               callback_setPassword={this.setPassword}
               callback_setActiveView={this.setActiveView}
-            />
+            />{" "}
           </View>
         );
       case "exercisesScreen":
         return (
-          <View style={{ width: "100%" }}>
+          <View
+            style={{
+              width: "100%"
+            }}
+          >
             <ExercisesScreen
               selectedMuscleGroup={this.state.selectedMuscleGroup}
               callback_setActiveView={this.setActiveView}
-            />
+            />{" "}
           </View>
         );
       case "selectExerciseScreen":
@@ -90,27 +117,31 @@ export default class App extends Component {
       case "mainScreen":
         return <MainScreen />;
       case "testScreen":
-        return (
-          <Fragment>
-            <Text style={[globalStyles.textInput]}>Hello</Text>
-            <SimpleTextComponent name="Kaitlyn" />
-          </Fragment>
-        );
+        return <TestScreen />;
       default:
         return <ErrorScreen />;
     }
   };
 
   render() {
+    if (!this.state.fontsLoaded) {
+      return (
+        <View>
+          <Text>hello</Text>
+        </View>
+      );
+    }
+
     return (
       <View style={globalStyles.screenContainer}>
         <View style={[globalStyles.container]}>{this.renderActiveView()}</View>(
-        {this.state.activeView !== "loginScreen" && (
-          <Navigator
-            callback_setActiveView={this.setActiveView}
-            activeView={this.state.activeView}
-          />
-        )}
+        {this.state.activeView !== "loginScreen" &&
+          this.state.activeView !== "testScreen" && (
+            <Navigator
+              callback_setActiveView={this.setActiveView}
+              activeView={this.state.activeView}
+            />
+          )}
         )
       </View>
     );

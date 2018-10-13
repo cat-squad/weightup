@@ -5977,6 +5977,10 @@ react-native-svg@6.2.2:
     lodash "^4.16.6"
     pegjs "^0.10.0"
 
+react-native-swipe-view@^3.0.1:
+  version "3.0.1"
+  resolved "https://infusionsoft.jfrog.io/infusionsoft/api/npm/npm/react-native-swipe-view/-/react-native-swipe-view-3.0.1.tgz#caaafe7cd1ae1813544b2b3a4f91716a72df5ce9"
+
 react-native-vector-icons@4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.5.0.tgz#6b95619e64f62f05f579f74a01fe5640df95158b"
@@ -6443,6 +6447,10 @@ rimraf@~2.4.0:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.4.5.tgz#ee710ce5d93a8fdb856fb5ea8ff0e2d75934b2da"
   dependencies:
     glob "^6.0.1"
+
+rn-viewpager@^1.2.9:
+  version "1.2.9"
+  resolved "https://infusionsoft.jfrog.io/infusionsoft/api/npm/npm/rn-viewpager/-/rn-viewpager-1.2.9.tgz#7f06f898e23b296f3b5be7c98bd9101d94427779"
 
 rsvp@^3.3.3:
   version "3.6.2"
