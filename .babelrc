@@ -1,0 +1,18 @@
+{
+  "presets": ["react-native"],
+  "plugins": [
+    "transform-react-jsx-source",
+    [
+      "module-resolver",
+      {
+        "extensions": [".js", ".ios.js", ".android.js"],
+        "alias": {
+          "@img": "./src/static/img",
+          "@screens": "./src/screens",
+          "@components": "./src/components",
+          "@styles": "./src/styles"
+        }
+      }
+    ]
+  ]
+}

@@ -14,32 +14,23 @@ import {
   Icon
 } from "native-base";
 
-const images = [
-  require("../static/img/wallpaper1.png"),
-  require("../static/img/wallpaper2.png"),
-  require("../static/img/wallpaper7.png"),
-  require("../static/img/wallpaper4.png"),
-  require("../static/img/wallpaper5.png"),
-  require("../static/img/wallpaper6.png")
-];
-
 const cards = [
   {
     text: "Card 1",
     name: "One",
-    image: images[0],
+    image: "",
     bodyGroup: "Arms"
   },
   {
     text: "Card 2",
     name: "Two",
-    image: images[1],
+    image: "",
     bodyGroup: "Legs"
   },
   {
     text: "Card 3",
     name: "Three",
-    image: images[2],
+    image: "",
     bodyGroup: "Core"
   }
 ];

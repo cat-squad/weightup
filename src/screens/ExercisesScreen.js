@@ -17,32 +17,23 @@ import {
   Right
 } from "native-base";
 
-const images = [
-  require("../static/img/wallpaper1.png"),
-  require("../static/img/wallpaper2.png"),
-  require("../static/img/wallpaper7.png"),
-  require("../static/img/wallpaper4.png"),
-  require("../static/img/wallpaper5.png"),
-  require("../static/img/wallpaper6.png")
-];
-
 const cards = [
   {
     text: "Lunges",
     name: "One",
-    image: images[0],
+    image: "",
     bodyGroup: "Legs"
   },
   {
     text: "Push Ups",
     name: "Two",
-    image: images[1],
+    image: "",
     bodyGroup: "Arms"
   },
   {
     text: "Deadlifts",
     name: "Three",
-    image: images[2],
+    image: "",
     bodyGroup: "Back"
   }
 ];

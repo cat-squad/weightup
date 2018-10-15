@@ -1,17 +1,18 @@
 import { View, ScrollView } from "react-native";
 import React, { Component, Fragment } from "react";
 import { Text, Header } from "native-base";
-import globalStyles from "./src/styles";
+import styles from "@styles";
 import { Ionicons } from "@expo/vector-icons";
 
-import TestScreen from "./src/screens/TestScreen";
-import DataScreen from "./src/screens/DataScreen";
-import ErrorScreen from "./src/screens/ErrorScreen";
-import ExercisesScreen from "./src/screens/ExercisesScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import MainScreen from "./src/screens/MainScreen";
-import SelectExerciseScreen from "./src/screens/SelectExerciseScreen";
-import SettingsScreen from "./src/screens/SettingsScreen";
+import LoadingScreen from "@screens/Loading/LoadingScreen";
+import SignUpScreen from "@screens/Login/SignUpScreen";
+import DataScreen from "@screens/DataScreen";
+import ErrorScreen from "@screens/ErrorScreen";
+import ExercisesScreen from "@screens/ExercisesScreen";
+import LoginScreen from "@screens/Login/LoginScreen";
+import MainScreen from "@screens/MainScreen";
+import SelectExerciseScreen from "@screens/SelectExerciseScreen";
+import SettingsScreen from "@screens/SettingsScreen";
 
 import SimpleTextComponent from "./src/components/SimpleTextComponent";
 import Navigator from "./src/components/Navigator";
@@ -22,7 +23,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeView: "testScreen",
+      activeView: "loginScreen",
       username: "",
       password: "",
       selectedMuscleGroup: "",
@@ -54,6 +55,7 @@ export default class App extends Component {
 
   setActiveView = screenName => {
     this.setState({
+      ...this.state,
       activeView: screenName
     });
   };
@@ -76,31 +78,22 @@ export default class App extends Component {
     switch (this.state.activeView) {
       case "loginScreen":
         return (
-          <View
-            style={{
-              width: "100%"
-            }}
-          >
-            {" "}
-            {/* <Text> {JSON.stringify(this.state)}</Text> */}{" "}
+          <View style={{ width: "100%" }}>
+            {/* <Text> {JSON.stringify(this.state)}</Text> */}
             <LoginScreen
               callback_setUsername={this.setUsername}
               callback_setPassword={this.setPassword}
               callback_setActiveView={this.setActiveView}
-            />{" "}
+            />
           </View>
         );
       case "exercisesScreen":
         return (
-          <View
-            style={{
-              width: "100%"
-            }}
-          >
+          <View style={{ width: "100%" }}>
             <ExercisesScreen
               selectedMuscleGroup={this.state.selectedMuscleGroup}
               callback_setActiveView={this.setActiveView}
-            />{" "}
+            />
           </View>
         );
       case "selectExerciseScreen":
@@ -110,14 +103,16 @@ export default class App extends Component {
             callback_setSelectedMuscleGroup={this.setSelectedMuscleGroup}
           />
         );
+      case "signUpScreen":
+        return <SignUpScreen callback_setActiveView={this.setActiveView} />;
       case "dataScreen":
         return <DataScreen />;
       case "settingsScreen":
         return <SettingsScreen callback_signOut={this.handleSignout} />;
       case "mainScreen":
         return <MainScreen />;
-      case "testScreen":
-        return <TestScreen />;
+      case "signUpScreen":
+        return <SignUpScreen />;
       default:
         return <ErrorScreen />;
     }
@@ -125,18 +120,14 @@ export default class App extends Component {
 
   render() {
     if (!this.state.fontsLoaded) {
-      return (
-        <View>
-          <Text>hello</Text>
-        </View>
-      );
+      return <LoadingScreen />;
     }
 
     return (
-      <View style={globalStyles.screenContainer}>
-        <View style={[globalStyles.container]}>{this.renderActiveView()}</View>(
+      <View style={styles.screenContainer}>
+        <View style={[styles.container]}>{this.renderActiveView()}</View>(
         {this.state.activeView !== "loginScreen" &&
-          this.state.activeView !== "testScreen" && (
+          this.state.activeView !== "signUpScreen" && (
             <Navigator
               callback_setActiveView={this.setActiveView}
               activeView={this.state.activeView}
